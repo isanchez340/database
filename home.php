@@ -9,12 +9,23 @@
 	<h1>Electronic Access - Web Interface</h1>
 	 <br/>
 	 <h2>Main Menu</h2>
+	<?php if ($_SESSION['admin'] == 'false') { ?>
 	<ul>
-	  <li><a href="ViewPet.php?username=dornelas">View PET 1</a></li>
+	  <li><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?>">View Request</a></li>
 	  <li><a href="ViewPets.php">View All Pets - Text</a></li>
 	  <li><a href="AddPet.php">Add Pet</a></li>
 	  <li><a href="logout.php">Logout</a></li>
 	</ul>
+	<?php } 
+	else { ?>
+	<ul>
+	  <li><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?>">View Request</a></li>
+	  <li><a href="ViewPets.php">View All Pets - Text</a></li>
+	  <li><a href="AddPet.php">Add Pet</a></li>
+	  <li><a href="logout.php">Logout</a></li>
+	</ul>
+	<?php } ?>
+	
   </body>
   
 </html>

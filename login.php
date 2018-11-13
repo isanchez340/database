@@ -7,22 +7,19 @@
       $myusername = mysqli_real_escape_string($db,$_POST['username']);
       $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
       
-      //Building the query
       $sql = "SELECT * FROM login WHERE username = '$myusername' and password = '$mypassword'";
-      //Performs a query on the database
       $result = mysqli_query($db,$sql);
-      //Fetch a result row as an associative, a numeric array, or both
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['user_id'];
       
-      //Gets the number of rows in a result
       $count = mysqli_num_rows($result);
       
-      // If result matched $myusername and $mypassword, table row must be 1 row
       if($count == 1) {
          $_SESSION['login_user'] = $myusername;
+		 $level = "SELECT admin FROM login";
+		 $_SESSION['admin'] = mysqli_query($db,$level);
          
-         header("location: welcome.php");
+         header("location: home.php");
       }else {
          $error = "Your Login Name or Password is invalid";
       }
