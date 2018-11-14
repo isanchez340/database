@@ -2,6 +2,9 @@
 	<h1>Electronic Access - Web Interface</h1>
 	 <br/>
 	 <h2>Main Menu</h2>
+	 <br/>
+	 	  <li><a href="home.php">Home</a> <?php echo "    " ?><a href="logout.php">Logout</a></li>
+	 <br/>
 
 Name: <input type="text" /><br/>
 <br/>
