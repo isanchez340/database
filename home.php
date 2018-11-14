@@ -9,19 +9,18 @@
 	<h1>Electronic Access - Web Interface</h1>
 	 <br/>
 	 <h2>Main Menu</h2>
-	<?php if ($_SESSION['admin'] == 'false') { ?>
+	 <h3>Welcome <?php echo $_COOKIE['mysite_username'] ?><h3>
+	<?php if ($_SESSION['admin'] == 'true') { ?>
 	<ul>
-	  <li><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?>">View Request</a></li>
-	  <li><a href="ViewPets.php">View All Pets - Text</a></li>
-	  <li><a href="AddPet.php">Add Pet</a></li>
+	  <li><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?>">View Pending Request</a></li>
+	  <li><a href="SendRequest.php">Fill Request Form</a></li>
 	  <li><a href="logout.php">Logout</a></li>
 	</ul>
 	<?php } 
 	else { ?>
 	<ul>
-	  <li><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?>">View Request</a></li>
-	  <li><a href="ViewPets.php">View All Pets - Text</a></li>
-	  <li><a href="AddPet.php">Add Pet</a></li>
+	  <li><a href="ViewRequest.php">View All Request</a></li>
+	  <li><a href="SendRequest.php">Fill Request Form</a></li>
 	  <li><a href="logout.php">Logout</a></li>
 	</ul>
 	<?php } ?>

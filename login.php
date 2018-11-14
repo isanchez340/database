@@ -1,56 +1,45 @@
-<?php include('header.php');?>
 <?php
-   require("server.php");
-   $error = "";
-   session_start();
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
-      $myusername = mysqli_real_escape_string($db,$_POST['username']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+
+#include("config.php"); 
+$host = "ilinkserver.cs.utep.edu";
+$db = 'f18_team8';
+$username = "cs_iasanchez4";
+$password = "pkmmaster12";
+// connect to the mysql server
+$conn = new mysqli($host,$username,$password,$db);
+if ($conn->connect_error){
+    die("fail");
+}
+else{
+      $myusername = mysqli_real_escape_string($conn,$_POST['username']);
+      $mypassword = mysqli_real_escape_string($conn,$_POST['password']); 
       
-      $sql = "SELECT * FROM login WHERE username = '$myusername' and password = '$mypassword'";
-      $result = mysqli_query($db,$sql);
+      //Building the query
+      $sql = "SELECT * FROM login WHERE Username = '$myusername' and Password = '$mypassword'";
+      //Performs a query on the database
+      $result = mysqli_query($conn,$sql);
+      //Fetch a result row as an associative, a numeric array, or both
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['user_id'];
       
+      //Gets the number of rows in a result
       $count = mysqli_num_rows($result);
       
+      // If result matched $myusername and $mypassword, table row must be 1 row
       if($count == 1) {
          $_SESSION['login_user'] = $myusername;
-		 $level = "SELECT admin FROM login";
-		 $_SESSION['admin'] = mysqli_query($db,$level);
          
          header("location: home.php");
-      }else {
+      }
+	  else {
          $error = "Your Login Name or Password is invalid";
       }
-   }
+
+
+setcookie("loggedin", "TRUE", time()+(3600 * 24));
+setcookie("mysite_username", "$myusername");
+echo "You are now logged in!"; 
+echo "<a href=\"home.php\">Main Menu</a>";
+}
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> Electronic Access Login</title>
-        <link rel = "stylesheet" href = "main.css" type = "text/css">
-    </head>
-    <body>
-        <div id= "buffer"><?php echo $error; ?></div>
-        <center>
-            <div id ="login">
-                <div id= "banner">
-                    <h3>Login</h3>
-                </div>
-
-                <form action = "" method = "post">
-                    <input type = "text" name = "username" placeholder = "Username" size ="40" class = "input"></br>
-                    <input type = "password" name = "password" placeholder = "Password" size = "40" class = "input"></br>
-                    <input type = "submit" value = "Log In" class = "input">
-                </form>
-
-            </div>
-        </center>
-
-    </body>
-
-</html>
-
-<?php include('footer.php');?>
