@@ -2,8 +2,8 @@
 
 // expire cookie
 setcookie ("loggedin", "", time() - 3600);
-
-echo "You are now logged out.<br>";
-echo "<a href=\"login.html\">Log in</a>.";
-
 ?>
+
+<html>
+<meta http-equiv="refresh" content="0; url=login.html">
+</html>

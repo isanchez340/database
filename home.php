@@ -1,5 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<?php if (!isset($_COOKIE['loggedin'])) die("You are not logged in!"); ?>
+<?php if (!isset($_COOKIE['loggedin'])){ ?>
+	<html>
+	<meta http-equiv="refresh" content="0; url=login.html">
+	</html>
+	
+<?php } 
+exit();
+?>
 <html>
   
   <head>
@@ -9,7 +16,7 @@
 	<h1>Electronic Access - Web Interface</h1>
 	 <br/>
 	 <h2>Main Menu</h2>
-	 <h3>Welcome <?php echo $_COOKIE['mysite_username'] ?><h3>
+	 <h3>Welcome <?php echo $_COOKIE['mysite_Name'] ?><h3>
 	<?php if ($_SESSION['admin'] == 'true') { ?>
 	<ul>
 	  <li><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?>">View Pending Request</a></li>

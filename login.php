@@ -1,3 +1,4 @@
+<html>
 <?php
 
 #include("config.php"); 
@@ -24,6 +25,7 @@ else{
       
       //Gets the number of rows in a result
       $count = mysqli_num_rows($result);
+	  $Name = $row['S_name'];
       
       // If result matched $myusername and $mypassword, table row must be 1 row
       if($count == 1) {
@@ -38,8 +40,9 @@ else{
 
 setcookie("loggedin", "TRUE", time()+(3600 * 24));
 setcookie("mysite_username", "$myusername");
+setcookie("mysite_name", "$Name");
 echo "You are now logged in!"; 
 echo "<a href=\"home.php\">Main Menu</a>";
 }
 ?>
-
+</html>

@@ -1,7 +1,10 @@
-<html><body>
-	<h1>Electronic Access - Web Interface</h1>
+<html>
+<body style="background-color:#041e42" text="white">
+	<h1>
+	Electronic Access - Web Interface</h1>
 	 <br/>
 	 <h2>Main Menu</h2>
+	 <body>
 	 <br/>
 	 	  <li><a href="home.php">Home</a> <?php echo "    " ?><a href="logout.php">Logout</a></li>
 	 <br/>

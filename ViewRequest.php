@@ -1,7 +1,24 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<?php if (!isset($_COOKIE['loggedin'])) die("You are not logged in!"); ?>
+<?php if (!isset($_COOKIE['loggedin'])){ ?>
+	<html>
+	<meta http-equiv="refresh" content="0; url=login.html">
+	</html>
+	
+<?php } 
+	exit();
+?>
 <html>
 <head>
+<?php 
+$host = "ilinkserver.cs.utep.edu";
+$db = 'f18_team8';
+$username = "cs_iasanchez4";
+$password = "pkmmaster12";
+// connect to the mysql server
+$conn = new mysqli($host,$username,$password,$db);
+$sql = "SELECT * FROM REQUEST";
+$result = mysqli_query($conn,$sql);
+?>
 <style>
 table, th, td {
     border: 1px solid black;
