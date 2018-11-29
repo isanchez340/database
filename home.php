@@ -1,37 +1,63 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <?php if (!isset($_COOKIE['loggedin'])){ ?>
 	<html>
 	<meta http-equiv="refresh" content="0; url=login.html">
 	</html>
 	
-<?php } 
+<?php  
 exit();
+}
 ?>
-<html>
-  
-  <head>
-  </head>
-  
-  <body>
-	<h1>Electronic Access - Web Interface</h1>
-	 <br/>
-	 <h2>Main Menu</h2>
-	 <h3>Welcome <?php echo $_COOKIE['mysite_Name'] ?><h3>
-	<?php if ($_SESSION['admin'] == 'true') { ?>
-	<ul>
-	  <li><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?>">View Pending Request</a></li>
-	  <li><a href="SendRequest.php">Fill Request Form</a></li>
-	  <li><a href="logout.php">Logout</a></li>
-	</ul>
-	<?php } 
-	else { ?>
-	<ul>
-	  <li><a href="ViewRequest.php">View All Request</a></li>
-	  <li><a href="SendRequest.php">Fill Request Form</a></li>
-	  <li><a href="logout.php">Logout</a></li>
-	</ul>
-	<?php } ?>
-	
-  </body>
-  
+
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Electronic Access - Web Interface</title>
+    <meta name="description" content="Main Menu">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+	<header>
+		<div id="logo"><img src="UTEP.png">Electronic Access - Web Interface</div>
+		<nav>  
+			<ul>
+				<li><a href="logout.php">Logout</a>
+			</ul>
+		</nav>
+	</header>
+	<section>
+		<strong><h1>Main Menu</h1></strong>
+	 <h3>Welcome <?php echo $_COOKIE['name'] ?><h3>
+	</section>
+	<section id="pageContent">
+		<?php if ($_COOKIE['access']) { ?>
+		<aside>
+			<div><h2><a href="ViewRequest.php"">View All Pending Request</a></h2></br></div>
+			<div><h2><a href="SendRequest.php"style="text-decoloration:none">Report</a></h2></br></div>
+			<div>Sidebar 3</div>
+			</br>
+		</aside>
+		<?php }
+		else { ?>
+		
+		<aside>
+			<div><h2><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?> "">View Pending Request</a></h2></br></div>
+			<div><h2><a href="SendRequest.php"style="text-decoloration:none">Report</a></h2></br></div>
+			<div>Sidebar 3</div>
+			</br>
+		</aside>
+		
+		<?php } ?>
+	</section>
+	<footer>
+	</br>
+	<img src="banner.bmp">
+	</br>
+	</footer>
+
+
+</body>
+
 </html>

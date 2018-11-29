@@ -1,57 +1,69 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <?php if (!isset($_COOKIE['loggedin'])){ ?>
 	<html>
 	<meta http-equiv="refresh" content="0; url=login.html">
 	</html>
 	
-<?php } 
-	exit();
-?>
-<html>
-<head>
-<?php 
-$host = "ilinkserver.cs.utep.edu";
-$db = 'f18_team8';
-$username = "cs_iasanchez4";
-$password = "pkmmaster12";
-// connect to the mysql server
-$conn = new mysqli($host,$username,$password,$db);
-$sql = "SELECT * FROM REQUEST";
-$result = mysqli_query($conn,$sql);
-?>
-<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+<?php  
+exit();
 }
-</style>
-</head>
-<body>
-	<h1>Electronic Access - Web Interface</h1>
-	 <br/>
-	 <h2>Request for <?php echo "user1" ?></h2>
-	 <br/>
-	 	  <li><a href="home.php">Home</a> <?php echo "    " ?><a href="logout.php">Logout</a></li>
-	 <br/>
+?>
 
-<table style="width:100%">
-  <tr>
-    <th>Professor Name</th>
-    <th>Lab#</th> 
-    <th>Status</th>
-  </tr>
-  <tr>
-    <td>Dr. Villanueva</td>
-    <td>CCSB 0.00000001</td>
-    <td>Denied</td>
-  </tr>
-  <tr>
-    <td>Dr. Ceberio</td>
-    <td>CCSB 0.00000002</td>
-    <td>Pending</td>
-  </tr>
-</table>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Electronic Access - Web Interface</title>
+    <meta name="description" content="Main Menu">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+	<header>
+		<div id="logo"><img src="UTEP.png">Electronic Access - Web Interface</div>
+		<nav>  
+			<ul>
+				<li><a href="logout.php">Logout</a>
+			</ul>
+		</nav>
+	</header>
+	<section>
+	<?php if ($_COOKIE['access']) { ?>
+		<strong><h1>View All Request</h1></strong>
+	<?php }
+	else { ?>
+		
+		
+	<?php } ?>
+	 <h3>Welcome <?php echo $_COOKIE['name'] ?><h3>
+	</section>
+	<section id="pageContent">
+		<?php if ($_COOKIE['access']) { ?>
+		<aside>
+			<div><h2><a href="ViewRequest.php"">View All Pending Request</a></h2></br></div>
+			<div><h2><a href="SendRequest.php"style="text-decoloration:none">Report</a></h2></br></div>
+			<div>Sidebar 3</div>
+			</br>
+		</aside>
+		<?php }
+		else { ?>
+		
+		<aside>
+			<div><h2><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?> "">View Pending Request</a></h2></br></div>
+			<div><h2><a href="SendRequest.php"style="text-decoloration:none">Report</a></h2></br></div>
+			<div>Sidebar 3</div>
+			</br>
+		</aside>
+		
+		<?php } ?>
+	</section>
+	<footer>
+	</br>
+	<img src="banner.bmp">
+	</br>
+	</footer>
+
 
 </body>
-</html>
 
+</html>

@@ -21,16 +21,18 @@ else{
       $result = mysqli_query($conn,$sql);
       //Fetch a result row as an associative, a numeric array, or both
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $active = $row['user_id'];
+      $active = $row['Username'];
+	  $admin = $row['is_admin'];
       
       //Gets the number of rows in a result
       $count = mysqli_num_rows($result);
-	  $Name = $row['S_name'];
       
       // If result matched $myusername and $mypassword, table row must be 1 row
       if($count == 1) {
          $_SESSION['login_user'] = $myusername;
-         
+	     $_SESSION['priv'] = $admin;
+		
+		 
          header("location: home.php");
       }
 	  else {
@@ -39,8 +41,9 @@ else{
 
 
 setcookie("loggedin", "TRUE", time()+(3600 * 24));
-setcookie("mysite_username", "$myusername");
-setcookie("mysite_name", "$Name");
+setcookie("mysite_username", "$username");
+setcookie("name", "$active");
+setcookie("access", "$admin");
 echo "You are now logged in!"; 
 echo "<a href=\"home.php\">Main Menu</a>";
 }

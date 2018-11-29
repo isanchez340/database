@@ -1,6 +1,7 @@
 <html>
-<body style="background-color:#041e42" text="white">
-	<h1>
+<body >
+<img src="banner.bmp">
+	<h1>style="background-color:#041e42" text="white"
 	Electronic Access - Web Interface</h1>
 	 <br/>
 	 <h2>Main Menu</h2>
@@ -8,28 +9,36 @@
 	 <br/>
 	 	  <li><a href="home.php">Home</a> <?php echo "    " ?><a href="logout.php">Logout</a></li>
 	 <br/>
-
-Name: <input type="text" /><br/>
+Name: </br>
+<input type="text" /><br/>
 <br/>
-Days of Access: <input type="text" /><br/>
+Days of Access: </br>
+<input type="text" /><br/>
 <br/>
-Hours of Access: <input type="text" /><br/>
+Hours of Access: </br>
+<input type="text" /><br/>
 <br/>
-Start Date: <input type="text" /><br/>
+Start Date: </br>
+<input type="text" /><br/>
 <br/>
-End Date: <input type="text" /><br/>
+End Date: </br>
+<input type="text" /><br/>
 <br/>
-Room Number: <input type="text" /><br/>
+Room Number: </br>
+<input type="text" /><br/>
 <br/>
-Student ID: <input type="text" /><br/>
+Student ID: </br>
+<input type="text" /><br/>
 <br/>
-Email: <input type="text" /><br/>
+Email: </br>
+<input type="text" /><br/>
 <br/>
-Phone Number: <input type="text" /><br/>
+Phone Number: </br>
+<input type="text" /><br/>
 <br/>
-Expected Graduation Date: <input type="text" /><br/>
+Expected Graduation Date: </br>
+<input type="text" /><br/>
 <br/>
-
 
 <input type="submit" /><br/>
 </form>
