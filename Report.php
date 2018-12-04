@@ -109,7 +109,7 @@ else{
 			</br>
 				<?php } 
 				else {
-					$sql = "select * from key_requests";
+					$sql = "select * from request_per_room";
 					$result = mysqli_query($conn,$sql);?>
 			<h2>Requests Per Room</h2>
 			<style>
