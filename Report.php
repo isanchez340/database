@@ -119,11 +119,9 @@ else{
 			<table style="width:100%">
 			<tr>
 				<th>Request Number</th>
-				<th>Student ID</th>
 				<th>Professor ID</th>
-				<th>Request Start Date</th>
-				<th>Request End Date</th>
-				<th>Request Status</th>
+				<th>Room Number</th>
+
 			</tr>
 			<?php while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) { ?>
 			<tr>
