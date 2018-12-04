@@ -8,9 +8,37 @@
 exit();
 }
 ?>
+<?php
 
+#include("config.php"); 
+$host = "ilinkserver.cs.utep.edu";
+$db = 'f18_team8';
+$username = "cs_iasanchez4";
+$password = "pkmmaster12";
+// connect to the mysql server
+$conn = new mysqli($host,$username,$password,$db);
+$_POST['username'] = $username;
+$_POST['password'] = $password;
+if ($conn->connect_error){
+    die("fail");
+}
+
+else{ 
+    $myusername = mysqli_real_escape_string($conn,$_POST['username']);
+    $mypassword = mysqli_real_escape_string($conn,$_POST['password']); 
+	$SID = $_COOKIE['ID'];
+	$sql = "SELECT U_f_name FROM student where U_ID = '$SID'";
+	$result = mysqli_query($conn,$sql);
+	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	setcookie("Sname", "$row[U_f_name]");
+	$text = $row['U_f_name'];
+	$var_str = var_export($text, true);
+	$var = "<?php\n\n\$text = $var_str;\n\n?>";
+	file_put_contents('name.txt', $var);
+	
+?>
 <html lang="en" class="no-js">
-<head>
+<head >
     <meta charset="utf-8">
     <title>Electronic Access - Web Interface</title>
     <meta name="description" content="Main Menu">
@@ -27,37 +55,40 @@ exit();
 			</ul>
 		</nav>
 	</header>
-	<section>
+	<section style="background-color:#fe880f">
+		
 		<strong><h1>Main Menu</h1></strong>
-	 <h3>Welcome <?php echo $_COOKIE['name'] ?><h3>
+	<?php if(!$_COOKIE['access']) { ?>
+	 <h3>Welcome <?php echo "$row[U_f_name]"; ?><h3>
+	<?php } else { ?>
+		<h3>Welcome Admin<h3>
+	<?php } ?>
+		
 	</section>
 	<section id="pageContent">
-		<?php if ($_COOKIE['access']) { ?>
 		<aside>
-			<div><h2><a href="ViewRequest.php"">View All Pending Request</a></h2></br></div>
-			<div><h2><a href="SendRequest.php"style="text-decoloration:none">Report</a></h2></br></div>
-			<div>Sidebar 3</div>
-			</br>
-		</aside>
+		<?php if ($_COOKIE['access']) { ?>
+			<div><h2><a href="ViewRequest.php">View All Pending Request</a></h2></br></div>
+			<div><h2><a href="Report.html"style="text-decoloration:none">Report</a></h2></br></div>
+			<div><h2><a href="Add.html"style="text-decoloration:none">Add User</a></h2></br></div>
+			<div><h2><a href="Terminal.html"style="text-decoloration:none">Terminal</a></h2></br></div>
 		<?php }
 		else { ?>
-		
-		<aside>
-			<div><h2><a href="ViewRequest.php?username=<?php $_SESSION['login_user']?> "">View Pending Request</a></h2></br></div>
-			<div><h2><a href="SendRequest.php"style="text-decoloration:none">Report</a></h2></br></div>
-			<div>Sidebar 3</div>
+			<div><h2><a href="ViewRequest.php">View Pending Request</a></h2></br></div>
+			<div><h2><a href="SendRequest.html"style="text-decoloration:none">Send Access Request</a></h2></br></div>
 			</br>
-		</aside>
-		
 		<?php } ?>
+		</aside>
 	</section>
 	<footer>
 	</br>
+	<center>
 	<img src="banner.bmp">
+	</center>
 	</br>
 	</footer>
 
 
 </body>
-
+<?php } ?>
 </html>

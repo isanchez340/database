@@ -21,7 +21,7 @@ else{
       $result = mysqli_query($conn,$sql);
       //Fetch a result row as an associative, a numeric array, or both
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $active = $row['Username'];
+      $active = $row['username'];
 	  $admin = $row['is_admin'];
       
       //Gets the number of rows in a result
@@ -29,23 +29,33 @@ else{
       
       // If result matched $myusername and $mypassword, table row must be 1 row
       if($count == 1) {
-         $_SESSION['login_user'] = $myusername;
-	     $_SESSION['priv'] = $admin;
+		if(!$admin) {
+			$SID = $row[S_ID];
+			setcookie("ID", "$SID");
+		}
+        $_SESSION['login_user'] = $myusername;
+	    $_SESSION['priv'] = $admin;
+		setcookie("loggedin", "TRUE", time()+(3600 * 24));
+		setcookie("mysite_username", "$username");
+		setcookie("name", "$active");
+		setcookie("access", "$admin");
+		echo "You are now logged in!"; 
+		echo "<a href=\"home.php\">Main Menu</a>";
 		
 		 
          header("location: home.php");
       }
 	  else {
-         $error = "Your Login Name or Password is invalid";
+         echo "Your Login Name or Password is invalid";
+		 ?>
+		 </br>
+		 <?php
+		 echo "redirecting...";
+		 ?>
+		 	<meta http-equiv="refresh" content="2; url=login.html">
+			<?php
       }
 
-
-setcookie("loggedin", "TRUE", time()+(3600 * 24));
-setcookie("mysite_username", "$username");
-setcookie("name", "$active");
-setcookie("access", "$admin");
-echo "You are now logged in!"; 
-echo "<a href=\"home.php\">Main Menu</a>";
 }
 ?>
 </html>

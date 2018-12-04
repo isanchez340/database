@@ -28,20 +28,16 @@ if ($conn->connect_error){
 else{ 
     $myusername = mysqli_real_escape_string($conn,$_POST['username']);
     $mypassword = mysqli_real_escape_string($conn,$_POST['password']); 
-	$SID = $_COOKIE['ID'];
-	$Pname = $_POST['ProfessorName'];
-	$prof = "select U_ID from professor where U_f_name = '$Pname'";
-	$result = mysqli_query($conn,$prof);
-	$Prow = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	$Sdate = $_POST['StartDate'];
-	$Edate = $_POST['EndDate'];
-	$Bkey = $_POST['brass'];
-	$Sgroup = $_POST['group'];
-	$Ahours = $_POST['Hours'];
-	$record = rand(1, 99999999);
-	$order = rand(1, 999999);
-	$request_no = rand(1, 999999);
-	$sql = "call E_request('$request_no','$SID','$Prow[U_ID]','80000146','$Sdate','$Edate', '$Bkey','$record','$order', '$Sgroup', '$Ahours')";
+	$SID = $_POST['ID'];
+	$Fname = $_POST['Fname'];
+	$Min = $_POST['Min'];
+	$Lname = $_POST['Lname'];
+	$Pnum = $_POST['Pnum'];
+	$Gdate = $_POST['Gdate'];
+	$Email = $_POST['Email'];
+	$Pass = $_POST['Pass'];
+	$User = $_POST['User'];
+	$sql = "call add_student('$SID','$Fname','$Min','$Lname','$Pnum','$Gdate','$Email', '$User', '$Pass')";
 	$result = mysqli_query($conn,$sql);
 	$Prow = mysqli_fetch_array($result,MYSQLI_ASSOC);
 }?>
@@ -68,37 +64,41 @@ else{
 		</nav>
 	</header>
 	<section style="background-color:#fe880f">
-		<strong><h1>Send Access Request</h1></strong>
+		<strong><h1>Add Student</h1></strong>
 
-	 <h3>Welcome <?php include 'name.txt'; echo $text; ?><h3>
-	 <h2>Request Sent</h2>
+	 <h3>Welcome Admin</h3>
 	</section>
 	<section id="pageContent">
+	<h2>Student Added</h2>
 <aside>
-<form action="SendRequest.php" method="post">
-Hours of Access: </br>
+<form action="Add.php" method="post">
+Student ID: </br>
+<input type="text" name ="ID" size="20"/><br/>
 <br/>
-Start Date: </br>
-<input type="text" name ="StartDate" size="20"/><br/>
+Student First Name: </br>
+<input type="text" name ="Fname" size="20"/><br/>
 <br/>
-End Date: </br>
-<input type="text" name ="EndDate" size="20"/><br/>
+Student Middle Initial: </br>
+<input type="text" name ="Min" size="20"/><br/>
 <br/>
-Professor Name: </br>
-<input type="text" name ="ProfessorName" size="20"/><br/>
+Student Last Name: </br>
+<input type="text" name ="Lname" size="20"/><br/>
 <br/>
-Project Group: </br>
-<input type="text" name ="group" size="20"/><br/>
+Student Phone Number: </br>
+<input type="text" name ="Pnum" size="20"/><br/>
 <br/>
 Expected Graduation Date: </br>
-<input type="text" name ="GraduationDate" size="20"/><br/>
+<input type="text" name ="Gdate" size="20"/><br/>
 <br/>
-Brass Key: </br>
-  <select name="brass">
-    <option value="1">Yes</option>
-    <option value="0">No</option>
-  </select>
-  </br>
+Student Email: </br>
+<input type="text" name ="Email" size="20"/><br/>
+<br/>
+Student Username: </br>
+<input type="text" name ="User" size="20"/><br/>
+<br/>
+Student Password: </br>
+<input type="password" name ="Pass" size="20"/><br/>
+<br/>
 </br>
 <ul>
 <li><input type="submit" Value="Send" /><br/>
@@ -118,7 +118,5 @@ Brass Key: </br>
 
 
 </body>
-
-</html>
 
 </html>

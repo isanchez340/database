@@ -51,7 +51,7 @@ nav ul {
     border: none;
 }
 main {
-	float: left;
+	float: center;
 	width: 60%;
 }
 aside {
@@ -75,12 +75,13 @@ main section {
 	
 }
 footer {
-	background: #041e42;
+	position: fixed;
+	bottom:0;
+	left:0;
 	color: white;
 	max-width: auto;
-	margin: auto;
 	clear: both;
-	text-align: center;
+	text-align: left;
 
 }
 footer p {
@@ -90,8 +91,9 @@ address {
     padding: 10px 20px 30px 10px;
 }
 aside > div {
+	position: relative;
 	margin: auto auto;
-	background: #fe880f;
+	background: white;
 	min-height: auto;
 	min-width: 100%;
 }
@@ -131,6 +133,6 @@ body > section {
 	}
 
 }
-a { text-decoration: none; color:white; }
+a { color:black; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }

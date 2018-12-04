@@ -50,19 +50,41 @@ else{
 		</nav>
 	</header>
 	<section style="background-color:#fe880f">
-	<?php if ($_COOKIE['access']) { ?>
-		<strong><h1>View All Request</h1></strong>
-	<?php }
-	else { ?>
-		<strong><h1>View Pending Request</h1></strong>
-	<?php } ?>
-	 <h3>Welcome <?php include 'name.txt'; echo $text; ?><h3>
+	<strong><h1>Reports</h1></strong>
+	 <h3>Welcome Admin</h3>
 	</section>
 	<section id="pageContent">
 	<aside>
-		<?php if ($_COOKIE['access']) { 
-			$sql = "SELECT * FROM request";
+		<?php if ($_POST['report'] == 0) { 
+			$sql = "SELECT u_id Sid, u_f_name First,u_l_name Last, s_grad_date 'Grad Date' FROM Student WHERE s_grad_date >= CURDATE() AND s_grad_date <= CURDATE() + INTERVAL 3 MONTH";
 			$result = mysqli_query($conn,$sql);?>
+			<h2>Graduating Students</h2>
+			<style>
+			table, th, td {
+			border: 3px solid black; }
+			</style>
+			<table style="width:100%">
+			<tr>
+				<th>ID Number</th>
+				<th>Student Fist Name</th>
+				<th>Student Last Name</th>
+				<th>Graduation Date</th>
+
+			</tr>
+			<?php while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) { ?>
+			<tr>
+				<?php foreach($row as $data) { ?>
+					<th><?php echo "$data"; ?> </th>
+				<?php } ?>
+			</tr>
+			<?php } ?>
+			</table>
+			</br>
+		<?php } 
+		elseif($_POST['report'] == 1) {
+			$sql = "select * from key_requests";
+			$result = mysqli_query($conn,$sql);	?>
+			<h2>Request Student Status</h2>
 			<style>
 			table, th, td {
 			border: 3px solid black; }
@@ -71,17 +93,10 @@ else{
 			<tr>
 				<th>Request Number</th>
 				<th>Student ID</th>
-				<th>P_ID</th>
-				<th>A_ID</th>
+				<th>Professor ID</th>
 				<th>Request Start Date</th>
 				<th>Request End Date</th>
 				<th>Request Status</th>
-				<th>Brass Key</th>
-				<th>Record Number</th>
-				<th>Key Returned Status</th>
-				<th>Work Order Number</th>
-				<th>Electronic Access</th>
-				<th>Student Group</th>
 			</tr>
 			<?php while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) { ?>
 			<tr>
@@ -92,33 +107,23 @@ else{
 			<?php } ?>
 			</table>
 			</br>
-		
-		<?php } 
-		else {
-			$SID = $_COOKIE['ID'];
-			$sql = "SELECT * FROM request WHERE S_ID = '$SID'";
-			$result = mysqli_query($conn,$sql);
-			$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-		?>
+				<?php } 
+				else {
+					$sql = "select * from key_requests";
+					$result = mysqli_query($conn,$sql);?>
+			<h2>Requests Per Room</h2>
 			<style>
-				table, th, td {
-				border: 2px solid black; }
+			table, th, td {
+			border: 3px solid black; }
 			</style>
 			<table style="width:100%">
 			<tr>
 				<th>Request Number</th>
 				<th>Student ID</th>
-				<th>P_ID</th>
-				<th>A_ID</th>
+				<th>Professor ID</th>
 				<th>Request Start Date</th>
 				<th>Request End Date</th>
 				<th>Request Status</th>
-				<th>Brass Key</th>
-				<th>Record Number</th>
-				<th>Key Returned Status</th>
-				<th>Work Order Number</th>
-				<th>Electronic Access</th>
-				<th>Student Group</th>
 			</tr>
 			<?php while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) { ?>
 			<tr>
@@ -129,7 +134,7 @@ else{
 			<?php } ?>
 			</table>
 			</br>
-		<?php } ?>
+				<?php } ?>
 	</aside>
 	</section>
 </body>
